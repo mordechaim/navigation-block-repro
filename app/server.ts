@@ -3,5 +3,5 @@
 import { sleep } from './sleep';
 
 export async function sleepyServer() {
-  await sleep(10000);
+  await sleep(5000);
 }

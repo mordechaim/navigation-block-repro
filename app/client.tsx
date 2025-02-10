@@ -11,7 +11,7 @@ export function ClientComponent() {
   const handleClient = () => {
     startTransition(async () => {
       console.log('start client transition');
-      await sleep(10000);
+      await sleep(5000);
       console.log('end client transition');
     });
   };
