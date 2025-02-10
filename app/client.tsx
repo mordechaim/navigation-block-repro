@@ -24,6 +24,14 @@ export function ClientComponent() {
     });
   };
 
+  const handleRouteHandler = () => {
+    startTransition(async () => {
+      console.log('start route handler transition');
+      await fetch('/sleep');
+      console.log('end route handler transition');
+    });
+  };
+
   return (
     <div
       style={{
@@ -34,6 +42,9 @@ export function ClientComponent() {
     >
       <button onClick={handleClient}>Long running client transition</button>
       <button onClick={handleServer}>Long running server transition</button>
+      <button onClick={handleRouteHandler}>
+        Long running route handler transition
+      </button>
 
       <Link
         href='/page-2'
