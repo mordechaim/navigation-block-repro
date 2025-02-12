@@ -1,14 +1,11 @@
 'use server';
 
-import {
-  unstable_cacheTag as cacheTag,
-  unstable_expireTag as expireTag,
-} from 'next/cache';
+import { unstable_cacheTag as cacheTag, revalidateTag } from 'next/cache';
 import { sleep } from './sleep';
 
 export async function revalidate() {
   await sleep(5000);
-  expireTag('number');
+  revalidateTag('number');
 }
 
 export async function getNumber() {
