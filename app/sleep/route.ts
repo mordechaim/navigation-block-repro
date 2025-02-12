@@ -1,6 +1,7 @@
-import { sleep } from '../sleep';
+import { NextResponse } from 'next/server';
+import { revalidate } from '../server';
 
 export async function GET() {
-  await sleep(5000);
-  return new Response(undefined, { status: 200 });
+  await revalidate();
+  return NextResponse.json({});
 }

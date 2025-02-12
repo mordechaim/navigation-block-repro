@@ -1,6 +1,7 @@
+import { connection } from 'next/server';
 import { ClientComponent } from './client';
 
-/** Add your relevant code here for the issue to reproduce */
-export default function Home() {
+export default async function Home() {
+  await connection();
   return <ClientComponent />;
 }

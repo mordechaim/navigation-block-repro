@@ -2,33 +2,25 @@
 
 import Link from 'next/link';
 import { useTransition } from 'react';
-import { sleepyServer } from './server';
-import { sleep } from './sleep';
+import { revalidate } from './server';
 
 export function ClientComponent() {
   const [pending, startTransition] = useTransition();
 
-  const handleClient = () => {
+  const handleServerAction = () => {
     startTransition(async () => {
-      console.log('start client transition');
-      await sleep(5000);
-      console.log('end client transition');
-    });
-  };
-
-  const handleServer = () => {
-    startTransition(async () => {
-      console.log('start server transition');
-      await sleepyServer();
-      console.log('end server transition');
+      console.log('start server action');
+      await revalidate();
+      console.log('end server action');
     });
   };
 
   const handleRouteHandler = () => {
     startTransition(async () => {
-      console.log('start route handler transition');
-      await fetch('/sleep');
-      console.log('end route handler transition');
+      console.log('start route handler');
+      const res = await fetch('/sleep');
+      await res.json();
+      console.log('end route handler');
     });
   };
 
@@ -40,10 +32,11 @@ export function ClientComponent() {
         alignItems: 'start',
       }}
     >
-      <button onClick={handleClient}>Long running client transition</button>
-      <button onClick={handleServer}>Long running server transition</button>
+      <button onClick={handleServerAction}>
+        Revalidate with Server action
+      </button>
       <button onClick={handleRouteHandler}>
-        Long running route handler transition
+        Revalidate with Route handler
       </button>
 
       <Link
